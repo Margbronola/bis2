@@ -1,11 +1,11 @@
 import 'package:bis/aboutus.dart';
 import 'package:bis/acadrecord.dart';
-import 'package:bis/achiever.dart';
+import 'package:bis/achiever/achiever.dart';
 import 'package:bis/global/datacacher.dart';
 import 'package:bis/global/widget.dart';
 import 'package:bis/login.dart';
 import 'package:bis/services/auth.dart';
-import 'package:bis/studinfo.dart';
+import 'package:bis/student%20record/studinfo.dart';
 import 'package:flutter/material.dart';
 import 'package:page_transition/page_transition.dart';
 

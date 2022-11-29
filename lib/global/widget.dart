@@ -8,7 +8,7 @@ class MyWidget {
     String? text,
     FontWeight? fontWeight,
     double? size,
-    TextAlign? align,
+    TextAlign align = TextAlign.start,
     Color? color,
     double? letterSpacing,
   }) {

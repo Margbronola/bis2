@@ -1,26 +1,58 @@
+import 'package:bis/achiever/addacheiver.dart';
+import 'package:bis/global/datacacher.dart';
 import 'package:bis/global/widget.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:page_transition/page_transition.dart';
 
-class Grade11TVLAchieverPage extends StatefulWidget {
-  const Grade11TVLAchieverPage({super.key});
+class Grade7AchieverPage extends StatefulWidget {
+  const Grade7AchieverPage({super.key});
 
   @override
-  State<Grade11TVLAchieverPage> createState() => _Grade11TVLAchieverPageState();
+  State<Grade7AchieverPage> createState() => _Grade7AchieverPageState();
 }
 
-class _Grade11TVLAchieverPageState extends State<Grade11TVLAchieverPage> {
+class _Grade7AchieverPageState extends State<Grade7AchieverPage> {
+  final DataCacher _cacher = DataCacher.instance;
+
   @override
   Widget build(BuildContext context) {
     final Size size = MediaQuery.of(context).size;
+    String? p = _cacher.pages;
 
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.greenAccent,
         foregroundColor: Colors.black,
         elevation: 0,
-        title: const Text("GRADE 11", style: TextStyle(letterSpacing: 1)),
-        centerTitle: true,
+        actions: [
+          p == "Student"
+              ? Container()
+              : SizedBox(
+                  width: 100,
+                  child: MaterialButton(
+                    elevation: 0,
+                    padding: const EdgeInsets.all(0),
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        PageTransition(
+                            child: AddAchieverPage(
+                              level: 7,
+                            ),
+                            type: PageTransitionType.leftToRight),
+                      );
+                    },
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: const [
+                        Icon(Icons.person_add_alt_rounded),
+                        Text("New Data")
+                      ],
+                    ),
+                  )),
+          const SizedBox(width: 20),
+        ],
       ),
       body: Container(
         width: size.width,
@@ -29,16 +61,23 @@ class _Grade11TVLAchieverPageState extends State<Grade11TVLAchieverPage> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            Center(
+              child: MyWidget().text(
+                text: "GRADE 7".toUpperCase(),
+                fontWeight: FontWeight.bold,
+                size: 25,
+              ),
+            ),
+            const SizedBox(height: 10),
             MyWidget().text(
-              text: "TVL A".toUpperCase(),
+              text: "Section: ".toUpperCase(),
               fontWeight: FontWeight.bold,
               size: 20,
             ),
             StreamBuilder(
                 stream: FirebaseFirestore.instance
                     .collection("Achiever")
-                    .where("grade", isEqualTo: "11")
-                    .where("strand", isEqualTo: "TVL")
+                    .where("grade", isEqualTo: "7")
                     .snapshots(),
                 builder: (context, snapshot) {
                   if (snapshot.hasData && !snapshot.hasError) {
@@ -53,6 +92,11 @@ class _Grade11TVLAchieverPageState extends State<Grade11TVLAchieverPage> {
                           return Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
+                              MyWidget().text(
+                                text: "GRADE 7".toUpperCase(),
+                                fontWeight: FontWeight.bold,
+                                size: 20,
+                              ),
                               const SizedBox(height: 10),
                               Container(
                                 width: size.width,

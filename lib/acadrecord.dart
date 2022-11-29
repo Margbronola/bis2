@@ -62,9 +62,10 @@ class _AcadRecordPageState extends State<AcadRecordPage> {
                     child: Text(
                       "GRADE",
                       style: TextStyle(
-                          fontSize: 17,
-                          fontWeight: FontWeight.bold,
-                          letterSpacing: 1.5),
+                        fontSize: 17,
+                        fontWeight: FontWeight.bold,
+                        letterSpacing: 1.5,
+                      ),
                       textAlign: TextAlign.center,
                     ),
                   )

@@ -1,18 +1,17 @@
-import 'package:bis/addstudent.dart';
 import 'package:bis/global/widget.dart';
+import 'package:bis/student%20record/addstudent.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:page_transition/page_transition.dart';
 
-class StudentRecordPage extends StatefulWidget {
-  const StudentRecordPage({super.key});
+class Grade10StudentPage extends StatefulWidget {
+  const Grade10StudentPage({super.key});
 
   @override
-  State<StudentRecordPage> createState() => _StudentRecordPageState();
+  State<Grade10StudentPage> createState() => _Grade10StudentPageState();
 }
 
-class _StudentRecordPageState extends State<StudentRecordPage> {
-  String searchString = "";
+class _Grade10StudentPageState extends State<Grade10StudentPage> {
   @override
   Widget build(BuildContext context) {
     final Size size = MediaQuery.of(context).size;
@@ -22,9 +21,23 @@ class _StudentRecordPageState extends State<StudentRecordPage> {
         elevation: 0,
         backgroundColor: Colors.greenAccent.shade100,
         foregroundColor: Colors.black,
-        actions: [
-          SizedBox(
+        centerTitle: true,
+        title: const Text(
+          "GRADE 10",
+          style: TextStyle(
+              fontWeight: FontWeight.bold, fontSize: 20, letterSpacing: 1),
+        ),
+      ),
+      body: Container(
+        width: size.width,
+        height: size.height,
+        padding: const EdgeInsets.fromLTRB(20, 0, 20, 20),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.end,
+          children: [
+            SizedBox(
               width: 100,
+              height: 70,
               child: MaterialButton(
                 elevation: 0,
                 padding: const EdgeInsets.all(0),
@@ -32,7 +45,10 @@ class _StudentRecordPageState extends State<StudentRecordPage> {
                   Navigator.push(
                     context,
                     PageTransition(
-                        child: const AddStudentPage(),
+                        child: AddStudentPage(
+                          level: 10,
+                          grade: 10,
+                        ),
                         type: PageTransitionType.leftToRight),
                   );
                 },
@@ -43,28 +59,12 @@ class _StudentRecordPageState extends State<StudentRecordPage> {
                     Text("New Data")
                   ],
                 ),
-              )),
-          const SizedBox(width: 20),
-        ],
-      ),
-      body: Container(
-        width: size.width,
-        height: size.height,
-        padding: const EdgeInsets.symmetric(horizontal: 20),
-        child: ListView(
-          children: [
-            const SizedBox(height: 15),
-            MyWidget().text(
-                text: "STUDENT LIST",
-                fontWeight: FontWeight.bold,
-                size: 20,
-                letterSpacing: 2,
-                align: TextAlign.center),
-            const SizedBox(height: 20),
+              ),
+            ),
             StreamBuilder(
               stream: FirebaseFirestore.instance
                   .collection("Student")
-                  .orderBy("lastname")
+                  .where("grade", isEqualTo: "10")
                   .snapshots(),
               builder: (context, snapshot) {
                 if (snapshot.hasData && !snapshot.hasError) {
@@ -98,7 +98,7 @@ class _StudentRecordPageState extends State<StudentRecordPage> {
                               ),
                               MyWidget().text(
                                 text:
-                                    "${stud.get("grade") != null ? "${stud.get("grade")}" : ""} ${stud.get("section") != null ? "${stud.get("section")}" : ""}",
+                                    "${stud.get("grade") != null ? "${stud.get("grade")}" : ""} ${stud.get("strand") != null ? "${stud.get("strand")}" : ""} - ${stud.get("section") != null ? "${stud.get("section")}" : ""}",
                                 align: TextAlign.center,
                                 color: Colors.grey.shade800,
                               ),

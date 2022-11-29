@@ -1,26 +1,58 @@
+import 'package:bis/achiever/addacheiver.dart';
+import 'package:bis/global/datacacher.dart';
 import 'package:bis/global/widget.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:page_transition/page_transition.dart';
 
-class Grade10AchieverPage extends StatefulWidget {
-  const Grade10AchieverPage({super.key});
+class Grade9AchieverPage extends StatefulWidget {
+  const Grade9AchieverPage({super.key});
 
   @override
-  State<Grade10AchieverPage> createState() => _Grade10AchieverPageState();
+  State<Grade9AchieverPage> createState() => _Grade9AchieverPageState();
 }
 
-class _Grade10AchieverPageState extends State<Grade10AchieverPage> {
+class _Grade9AchieverPageState extends State<Grade9AchieverPage> {
+  final DataCacher _cacher = DataCacher.instance;
+
   @override
   Widget build(BuildContext context) {
     final Size size = MediaQuery.of(context).size;
+    String? p = _cacher.pages;
 
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.greenAccent,
         foregroundColor: Colors.black,
         elevation: 0,
-        title: const Text("GRADE 10", style: TextStyle(letterSpacing: 1)),
-        centerTitle: true,
+        actions: [
+          p == "Student"
+              ? Container()
+              : SizedBox(
+                  width: 100,
+                  child: MaterialButton(
+                    elevation: 0,
+                    padding: const EdgeInsets.all(0),
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        PageTransition(
+                            child: AddAchieverPage(
+                              level: 9,
+                            ),
+                            type: PageTransitionType.leftToRight),
+                      );
+                    },
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: const [
+                        Icon(Icons.person_add_alt_rounded),
+                        Text("New Data")
+                      ],
+                    ),
+                  )),
+          const SizedBox(width: 20),
+        ],
       ),
       body: Container(
         width: size.width,
@@ -29,15 +61,22 @@ class _Grade10AchieverPageState extends State<Grade10AchieverPage> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            Center(
+              child: MyWidget().text(
+                text: "GRADE 9".toUpperCase(),
+                fontWeight: FontWeight.bold,
+                size: 25,
+              ),
+            ),
             MyWidget().text(
-              text: "SECTION:",
+              text: "SECTION:".toUpperCase(),
               fontWeight: FontWeight.bold,
               size: 20,
             ),
             StreamBuilder(
                 stream: FirebaseFirestore.instance
                     .collection("Achiever")
-                    .where("grade", isEqualTo: "10")
+                    .where("grade", isEqualTo: "9")
                     .snapshots(),
                 builder: (context, snapshot) {
                   if (snapshot.hasData && !snapshot.hasError) {

@@ -1,76 +1,70 @@
-import 'package:bis/addacheiver.dart';
-import 'package:bis/g10achiever.dart';
-import 'package:bis/g11GASachiever.dart';
-import 'package:bis/g11TVLachiever.dart';
-import 'package:bis/g12GASachiever.dart';
-import 'package:bis/g12TVLachiever.dart';
-import 'package:bis/g7achiever.dart';
-import 'package:bis/g8achiever.dart';
-import 'package:bis/g9achiever.dart';
-import 'package:bis/global/container.dart';
-import 'package:bis/global/datacacher.dart';
+import 'package:bis/student%20record/addstudent.dart';
 import 'package:bis/global/widget.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:bis/student%20record/g10student.dart';
+import 'package:bis/student%20record/g11gasstudent.dart';
+import 'package:bis/student%20record/g11tvlstudent.dart';
+import 'package:bis/student%20record/g12gasstudent.dart';
+import 'package:bis/student%20record/g12tvlstudent.dart';
+import 'package:bis/student%20record/g7student.dart';
+import 'package:bis/student%20record/g8student.dart';
+import 'package:bis/student%20record/g9student.dart';
 import 'package:flutter/material.dart';
 import 'package:page_transition/page_transition.dart';
 
-class AchieverPage extends StatefulWidget {
-  const AchieverPage({super.key});
+class StudentRecordPage extends StatefulWidget {
+  const StudentRecordPage({super.key});
 
   @override
-  State<AchieverPage> createState() => _AchieverPageState();
+  State<StudentRecordPage> createState() => _StudentRecordPageState();
 }
 
-class _AchieverPageState extends State<AchieverPage> {
-  final DataCacher _cacher = DataCacher.instance;
+class _StudentRecordPageState extends State<StudentRecordPage> {
+  String searchString = "";
   @override
   Widget build(BuildContext context) {
     final Size size = MediaQuery.of(context).size;
-    String? p = _cacher.pages;
 
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
         backgroundColor: Colors.greenAccent.shade100,
         foregroundColor: Colors.black,
-        actions: [
-          p == "Student"
-              ? Container()
-              : SizedBox(
-                  width: 100,
-                  child: MaterialButton(
-                    elevation: 0,
-                    padding: const EdgeInsets.all(0),
-                    onPressed: () {
-                      Navigator.push(
-                        context,
-                        PageTransition(
-                            child: const AddAchieverPage(),
-                            type: PageTransitionType.leftToRight),
-                      );
-                    },
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: const [
-                        Icon(Icons.person_add_alt_rounded),
-                        Text("New Data")
-                      ],
-                    ),
-                  )),
-          const SizedBox(width: 20),
-        ],
+        // actions: [
+        //   SizedBox(
+        //       width: 100,
+        //       child: MaterialButton(
+        //         elevation: 0,
+        //         padding: const EdgeInsets.all(0),
+        //         onPressed: () {
+        //           Navigator.push(
+        //             context,
+        //             PageTransition(
+        //                 child: AddStudentPage(),
+        //                 type: PageTransitionType.leftToRight),
+        //           );
+        //         },
+        //         child: Row(
+        //           mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        //           children: const [
+        //             Icon(Icons.person_add_alt_rounded),
+        //             Text("New Data")
+        //           ],
+        //         ),
+        //       )),
+        //   const SizedBox(width: 20),
+        // ],
       ),
       body: Container(
         width: size.width,
         height: size.height,
-        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+        padding: const EdgeInsets.symmetric(horizontal: 20),
         child: ListView(
           children: [
             const SizedBox(height: 15),
             MyWidget().text(
-                text: "ACHIEVER STUDENT",
+                text: "STUDENT LIST",
                 fontWeight: FontWeight.bold,
-                size: 25,
+                size: 20,
                 letterSpacing: 2,
                 align: TextAlign.center),
             const SizedBox(height: 20),
@@ -79,7 +73,7 @@ class _AchieverPageState extends State<AchieverPage> {
                 Navigator.push(
                   context,
                   PageTransition(
-                    child: const Grade7AchieverPage(),
+                    child: const Grade7StudentPage(),
                     type: PageTransitionType.fade,
                   ),
                 );
@@ -103,7 +97,7 @@ class _AchieverPageState extends State<AchieverPage> {
                 Navigator.push(
                   context,
                   PageTransition(
-                    child: const Grade8AchieverPage(),
+                    child: const Grade8StudentPage(),
                     type: PageTransitionType.fade,
                   ),
                 );
@@ -128,7 +122,7 @@ class _AchieverPageState extends State<AchieverPage> {
                 Navigator.push(
                   context,
                   PageTransition(
-                    child: const Grade9AchieverPage(),
+                    child: const Grade9StudentPage(),
                     type: PageTransitionType.fade,
                   ),
                 );
@@ -153,7 +147,7 @@ class _AchieverPageState extends State<AchieverPage> {
                 Navigator.push(
                   context,
                   PageTransition(
-                    child: const Grade10AchieverPage(),
+                    child: const Grade10StudentPage(),
                     type: PageTransitionType.fade,
                   ),
                 );
@@ -178,7 +172,7 @@ class _AchieverPageState extends State<AchieverPage> {
                 Navigator.push(
                   context,
                   PageTransition(
-                    child: const Grade11GASAchieverPage(),
+                    child: const Grade11GASStudentPage(),
                     type: PageTransitionType.fade,
                   ),
                 );
@@ -203,7 +197,7 @@ class _AchieverPageState extends State<AchieverPage> {
                 Navigator.push(
                   context,
                   PageTransition(
-                    child: const Grade11TVLAchieverPage(),
+                    child: const Grade11TVLStudentPage(),
                     type: PageTransitionType.fade,
                   ),
                 );
@@ -228,7 +222,7 @@ class _AchieverPageState extends State<AchieverPage> {
                 Navigator.push(
                   context,
                   PageTransition(
-                    child: const Grade12GASAchieverPage(),
+                    child: const Grade12GASStudentPage(),
                     type: PageTransitionType.fade,
                   ),
                 );
@@ -253,7 +247,7 @@ class _AchieverPageState extends State<AchieverPage> {
                 Navigator.push(
                   context,
                   PageTransition(
-                    child: const Grade12TVLAchieverPage(),
+                    child: const Grade12TVLStudentPage(),
                     type: PageTransitionType.fade,
                   ),
                 );

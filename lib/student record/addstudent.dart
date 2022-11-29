@@ -5,7 +5,9 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:intl/intl.dart';
 
 class AddStudentPage extends StatefulWidget {
-  const AddStudentPage({super.key});
+  int? level;
+  int grade;
+  AddStudentPage({super.key, this.level, required this.grade});
 
   @override
   State<AddStudentPage> createState() => _AddStudentPageState();
@@ -16,7 +18,6 @@ class _AddStudentPageState extends State<AddStudentPage> {
   late final TextEditingController lname;
   late final TextEditingController fname;
   late final TextEditingController idnum;
-  late final TextEditingController grade;
   late final TextEditingController section;
   late final TextEditingController address;
   late final TextEditingController dob;
@@ -28,13 +29,22 @@ class _AddStudentPageState extends State<AddStudentPage> {
   late final TextEditingController mOccupation;
   bool isloading = false;
   String gender = "";
+  String strandvalue = 'GAS';
+  String sectionvalue = '';
+  String shsectionvalue = '';
+
+  var strands = ['GAS', 'TVL'];
+  var g7section = ['Diamond', 'Ruby', 'Peridot', ''];
+  var g8section = ['Emerald', 'Sapphire', 'Opal', 'Garnet', ''];
+  var g9section = ['Quarts', 'Acquamarine', 'Pearl', 'Amber', ''];
+  var g10section = ['Topaz', 'Cetrine', 'Silver', ''];
+  var shsection = ['A', 'B', 'C', ''];
 
   @override
   void initState() {
     lname = TextEditingController();
     fname = TextEditingController();
     idnum = TextEditingController();
-    grade = TextEditingController();
     section = TextEditingController();
     address = TextEditingController();
     dob = TextEditingController();
@@ -53,7 +63,6 @@ class _AddStudentPageState extends State<AddStudentPage> {
     lname.dispose();
     fname.dispose();
     idnum.dispose();
-    grade.dispose();
     section.dispose();
     address.dispose();
     dob.dispose();
@@ -148,31 +157,255 @@ class _AddStudentPageState extends State<AddStudentPage> {
                         ],
                       ),
                       const SizedBox(height: 5),
+                      widget.level == 12 || widget.level == 11
+                          ? Row(
+                              children: [
+                                MyWidget().text(text: "Strand "),
+                                Expanded(
+                                  child: Container(
+                                    height: 48,
+                                    width: 110,
+                                    padding: const EdgeInsets.all(5),
+                                    margin: const EdgeInsets.only(left: 10),
+                                    alignment: Alignment.centerRight,
+                                    decoration: const BoxDecoration(
+                                      borderRadius:
+                                          BorderRadius.all(Radius.circular(10)),
+                                    ),
+                                    child: DropdownButton(
+                                      isExpanded: false,
+                                      value: strandvalue,
+                                      elevation: 0,
+                                      style: TextStyle(
+                                          fontSize: 18,
+                                          color: Colors.grey.shade600),
+                                      icon: Icon(
+                                        Icons.expand_more_sharp,
+                                        color: Colors.grey.shade600,
+                                      ),
+                                      items: strands.map((String strands) {
+                                        return DropdownMenuItem(
+                                          value: strands,
+                                          child: Text(strands),
+                                        );
+                                      }).toList(),
+                                      onChanged: (String? newValue) {
+                                        setState(() {
+                                          strandvalue = newValue!;
+                                        });
+                                      },
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            )
+                          : Container(),
+                      const SizedBox(height: 5),
                       Row(
                         children: [
                           MyWidget().text(text: "Grade : "),
                           Expanded(
-                              child: Container(
-                            height: 40,
-                            padding: const EdgeInsets.only(left: 10),
-                            child: MyWidget().textFormField2(
-                                align: TextAlign.right,
-                                controller: grade,
-                                keyboardType: TextInputType.number),
-                          )),
+                            child: MyWidget().text(
+                                text: "${widget.grade}",
+                                align: TextAlign.end,
+                                fontWeight: FontWeight.bold),
+                          ),
                         ],
                       ),
                       const SizedBox(height: 5),
                       Row(
                         children: [
-                          MyWidget().text(text: "Strand & Section : "),
-                          Expanded(
+                          MyWidget().text(text: "Section : "),
+                          if (widget.level == 7) ...{
+                            Expanded(
                               child: Container(
-                            height: 40,
-                            padding: const EdgeInsets.only(left: 10),
-                            child: MyWidget().textFormField2(
-                                align: TextAlign.right, controller: section),
-                          )),
+                                height: 48,
+                                width: 110,
+                                padding: const EdgeInsets.all(5),
+                                margin: const EdgeInsets.only(left: 10),
+                                alignment: Alignment.centerRight,
+                                decoration: const BoxDecoration(
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(10)),
+                                ),
+                                child: DropdownButton(
+                                  isExpanded: false,
+                                  value: sectionvalue,
+                                  elevation: 0,
+                                  style: TextStyle(
+                                      fontSize: 18,
+                                      color: Colors.grey.shade600),
+                                  icon: Icon(
+                                    Icons.expand_more_sharp,
+                                    color: Colors.grey.shade600,
+                                  ),
+                                  items: g7section.map((String sec) {
+                                    return DropdownMenuItem(
+                                      value: sec,
+                                      child: Text(sec),
+                                    );
+                                  }).toList(),
+                                  onChanged: (String? newValue) {
+                                    setState(() {
+                                      sectionvalue = newValue!;
+                                    });
+                                  },
+                                ),
+                              ),
+                            ),
+                          },
+                          if (widget.level == 8) ...{
+                            Expanded(
+                              child: Container(
+                                height: 48,
+                                width: 110,
+                                padding: const EdgeInsets.all(5),
+                                margin: const EdgeInsets.only(left: 10),
+                                alignment: Alignment.centerRight,
+                                decoration: const BoxDecoration(
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(10)),
+                                ),
+                                child: DropdownButton(
+                                  isExpanded: false,
+                                  value: sectionvalue,
+                                  elevation: 0,
+                                  style: TextStyle(
+                                      fontSize: 18,
+                                      color: Colors.grey.shade600),
+                                  icon: Icon(
+                                    Icons.expand_more_sharp,
+                                    color: Colors.grey.shade600,
+                                  ),
+                                  items: g8section.map((String sec) {
+                                    return DropdownMenuItem(
+                                      value: sec,
+                                      child: Text(sec),
+                                    );
+                                  }).toList(),
+                                  onChanged: (String? newValue) {
+                                    setState(() {
+                                      sectionvalue = newValue!;
+                                    });
+                                  },
+                                ),
+                              ),
+                            ),
+                          },
+                          if (widget.level == 9) ...{
+                            Expanded(
+                              child: Container(
+                                height: 48,
+                                width: 110,
+                                padding: const EdgeInsets.all(5),
+                                margin: const EdgeInsets.only(left: 10),
+                                alignment: Alignment.centerRight,
+                                decoration: const BoxDecoration(
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(10)),
+                                ),
+                                child: DropdownButton(
+                                  isExpanded: false,
+                                  value: sectionvalue,
+                                  elevation: 0,
+                                  style: TextStyle(
+                                      fontSize: 18,
+                                      color: Colors.grey.shade600),
+                                  icon: Icon(
+                                    Icons.expand_more_sharp,
+                                    color: Colors.grey.shade600,
+                                  ),
+                                  items: g9section.map((String sec) {
+                                    return DropdownMenuItem(
+                                      value: sec,
+                                      child: Text(sec),
+                                    );
+                                  }).toList(),
+                                  onChanged: (String? newValue) {
+                                    setState(() {
+                                      sectionvalue = newValue!;
+                                    });
+                                  },
+                                ),
+                              ),
+                            ),
+                          },
+                          if (widget.level == 10) ...{
+                            Expanded(
+                              child: Container(
+                                height: 48,
+                                width: 110,
+                                padding: const EdgeInsets.all(5),
+                                margin: const EdgeInsets.only(left: 10),
+                                alignment: Alignment.centerRight,
+                                decoration: const BoxDecoration(
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(10)),
+                                ),
+                                child: DropdownButton(
+                                  isExpanded: false,
+                                  value: sectionvalue,
+                                  elevation: 0,
+                                  style: TextStyle(
+                                      fontSize: 18,
+                                      color: Colors.grey.shade600),
+                                  icon: Icon(
+                                    Icons.expand_more_sharp,
+                                    color: Colors.grey.shade600,
+                                  ),
+                                  items: g10section.map((String sec) {
+                                    return DropdownMenuItem(
+                                      value: sec,
+                                      child: Text(sec),
+                                    );
+                                  }).toList(),
+                                  onChanged: (String? newValue) {
+                                    setState(() {
+                                      sectionvalue = newValue!;
+                                    });
+                                  },
+                                ),
+                              ),
+                            ),
+                          },
+                          if (widget.level == 11 || widget.level == 12) ...{
+                            Expanded(
+                              child: Container(
+                                height: 48,
+                                width: 110,
+                                padding: const EdgeInsets.all(5),
+                                margin: const EdgeInsets.only(left: 10),
+                                alignment: Alignment.centerRight,
+                                decoration: const BoxDecoration(
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(10)),
+                                ),
+                                child: DropdownButton(
+                                  isExpanded: false,
+                                  value: shsectionvalue,
+                                  elevation: 0,
+                                  style: TextStyle(
+                                      fontSize: 18,
+                                      color: Colors.grey.shade600),
+                                  icon: Icon(
+                                    Icons.expand_more_sharp,
+                                    color: Colors.grey.shade600,
+                                  ),
+                                  items: shsection.map((String sec) {
+                                    return DropdownMenuItem(
+                                      value: sec,
+                                      child: Text(sec),
+                                    );
+                                  }).toList(),
+                                  onChanged: (String? newValue) {
+                                    setState(() {
+                                      shsectionvalue = newValue!;
+                                    });
+                                  },
+                                ),
+                              ),
+                            ),
+                          },
                         ],
                       ),
                       const SizedBox(height: 5),
@@ -414,7 +647,8 @@ class _AddStudentPageState extends State<AddStudentPage> {
                                   type: "student",
                                   lname: lname.text,
                                   fname: fname.text,
-                                  grade: grade.text,
+                                  grade: "${widget.grade}",
+                                  strand: strandvalue,
                                   section: section.text,
                                   address: address.text,
                                   sex: gender,

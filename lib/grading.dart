@@ -89,7 +89,7 @@ class _GradingPageState extends State<GradingPage> {
                                     size: 18),
                                 MyWidget().text(
                                     text:
-                                        "${stud.get("grade") != null ? "${stud.get("grade")}" : ""} ${stud.get("section") != null ? "${stud.get("section")}" : ""}",
+                                        "${stud.get("grade") != null ? "${stud.get("grade")}" : ""} ${stud.get("strand") != null ? "${stud.get("strand")}" : ""} - ${stud.get("section") != null ? "${stud.get("section")}" : ""}",
                                     align: TextAlign.center,
                                     color: Colors.grey.shade800),
                               ],

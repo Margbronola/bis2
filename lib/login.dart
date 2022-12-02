@@ -1,3 +1,4 @@
+import 'package:bis/admindashboard.dart';
 import 'package:bis/global/widget.dart';
 import 'package:bis/insdashboard.dart';
 import 'package:bis/services/auth.dart';
@@ -7,7 +8,8 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:page_transition/page_transition.dart';
 
 class LoginPage extends StatefulWidget {
-  const LoginPage({super.key});
+  String page;
+  LoginPage({super.key, required this.page});
 
   @override
   State<LoginPage> createState() => _LoginPageState();
@@ -19,7 +21,7 @@ class _LoginPageState extends State<LoginPage> {
   final Authentication _auth = Authentication();
   bool isObscure = false;
   bool isLoading = false;
-  String label = "";
+  // String label = "";
 
   @override
   Widget build(BuildContext context) {
@@ -80,7 +82,6 @@ class _LoginPageState extends State<LoginPage> {
                         height: 55,
                         margin: const EdgeInsets.only(bottom: 5),
                         child: TextFormField(
-                          keyboardType: TextInputType.emailAddress,
                           controller: password,
                           obscureText: isObscure ? false : true,
                           decoration: InputDecoration(
@@ -112,41 +113,41 @@ class _LoginPageState extends State<LoginPage> {
                           ),
                         ),
                       ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceAround,
-                        children: [
-                          SizedBox(
-                            width: 150,
-                            child: RadioListTile(
-                              contentPadding: const EdgeInsets.all(0),
-                              title: const Text("Student"),
-                              activeColor: Colors.green,
-                              value: "Student",
-                              groupValue: label,
-                              onChanged: (value) {
-                                setState(() {
-                                  label = value.toString();
-                                });
-                              },
-                            ),
-                          ),
-                          SizedBox(
-                            width: 150,
-                            child: RadioListTile(
-                              contentPadding: const EdgeInsets.all(0),
-                              title: const Text("Instructor"),
-                              activeColor: Colors.green,
-                              value: "Instructor",
-                              groupValue: label,
-                              onChanged: (value) {
-                                setState(() {
-                                  label = value.toString();
-                                });
-                              },
-                            ),
-                          ),
-                        ],
-                      ),
+                      // Row(
+                      //   mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      //   children: [
+                      //     SizedBox(
+                      //       width: 150,
+                      //       child: RadioListTile(
+                      //         contentPadding: const EdgeInsets.all(0),
+                      //         title: const Text("Student"),
+                      //         activeColor: Colors.green,
+                      //         value: "Student",
+                      //         groupValue: label,
+                      //         onChanged: (value) {
+                      //           setState(() {
+                      //             label = value.toString();
+                      //           });
+                      //         },
+                      //       ),
+                      //     ),
+                      //     SizedBox(
+                      //       width: 150,
+                      //       child: RadioListTile(
+                      //         contentPadding: const EdgeInsets.all(0),
+                      //         title: const Text("Instructor"),
+                      //         activeColor: Colors.green,
+                      //         value: "Instructor",
+                      //         groupValue: label,
+                      //         onChanged: (value) {
+                      //           setState(() {
+                      //             label = value.toString();
+                      //           });
+                      //         },
+                      //       ),
+                      //     ),
+                      //   ],
+                      // ),
                       SizedBox(
                         height: size.height * .04,
                       ),
@@ -179,15 +180,15 @@ class _LoginPageState extends State<LoginPage> {
                           onPressed: () async {
                             if (email.text.isNotEmpty &&
                                 password.text.isNotEmpty &&
-                                label != "") {
+                                widget.page != "") {
                               await _auth
                                   .signIn(
                                       email: email.text,
                                       password: password.text,
-                                      page: label)
+                                      page: widget.page)
                                   .then((value) {
                                 if (value != null) {
-                                  if (label == "Student") {
+                                  if (widget.page == "Student") {
                                     Navigator.pushReplacement(
                                       context,
                                       PageTransition(
@@ -195,11 +196,19 @@ class _LoginPageState extends State<LoginPage> {
                                         type: PageTransitionType.bottomToTop,
                                       ),
                                     );
-                                  } else {
+                                  } else if (widget.page == "Instructor") {
                                     Navigator.pushReplacement(
                                       context,
                                       PageTransition(
                                         child: const InstructorDashboardPage(),
+                                        type: PageTransitionType.bottomToTop,
+                                      ),
+                                    );
+                                  } else {
+                                    Navigator.pushReplacement(
+                                      context,
+                                      PageTransition(
+                                        child: const AdminDashboardPage(),
                                         type: PageTransitionType.bottomToTop,
                                       ),
                                     );

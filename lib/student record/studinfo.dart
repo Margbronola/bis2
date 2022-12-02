@@ -95,7 +95,7 @@ class _StudentInfoPageState extends State<StudentInfoPage> {
                               SizedBox(height: size.height * .005),
                               MyWidget().text(
                                   text:
-                                      "${docs.get("grade") != null ? "${docs.get("grade")}" : ""} ${docs.get("section") != null ? "${docs.get("section")}" : ""}",
+                                      "${docs.get("grade") != null ? "${docs.get("grade")}" : ""} ${docs.get("strand") != null ? "${docs.get("strand")}" : ""} - ${docs.get("section") != null ? "${docs.get("section")}" : ""}",
                                   align: TextAlign.center,
                                   fontWeight: FontWeight.bold,
                                   size: 17)

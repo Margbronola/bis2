@@ -2,6 +2,7 @@ import 'package:bis/global/container.dart';
 import 'package:bis/global/datacacher.dart';
 import 'package:bis/global/widget.dart';
 import 'package:bis/insdashboard.dart';
+import 'package:bis/landing.dart';
 import 'package:bis/login.dart';
 import 'package:bis/studdashboard.dart';
 import 'package:flutter/material.dart';
@@ -31,7 +32,7 @@ class _SplashScreenPageState extends State<SplashScreenPage> {
       Navigator.pushReplacement(
         context,
         PageTransition(
-          child: const LoginPage(),
+          child: const LandingPage(),
           type: PageTransitionType.fade,
         ),
       );

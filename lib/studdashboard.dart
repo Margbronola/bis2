@@ -3,7 +3,7 @@ import 'package:bis/acadrecord.dart';
 import 'package:bis/achiever/achiever.dart';
 import 'package:bis/global/datacacher.dart';
 import 'package:bis/global/widget.dart';
-import 'package:bis/login.dart';
+import 'package:bis/landing.dart';
 import 'package:bis/services/auth.dart';
 import 'package:bis/student%20record/studinfo.dart';
 import 'package:flutter/material.dart';
@@ -50,7 +50,7 @@ class _StudDashboardPageState extends State<StudDashboardPage> {
                   Navigator.pushReplacement(
                     context,
                     PageTransition(
-                      child: const LoginPage(),
+                      child: const LandingPage(),
                       type: PageTransitionType.fade,
                     ),
                   );
@@ -267,55 +267,6 @@ class _StudDashboardPageState extends State<StudDashboardPage> {
                                       ),
                                       const Text(
                                         "Academic Achievers",
-                                        style: TextStyle(
-                                          fontWeight: FontWeight.w500,
-                                          letterSpacing: 1,
-                                        ),
-                                        textAlign: TextAlign.center,
-                                      )
-                                    ],
-                                  ),
-                                ),
-                              ),
-                              GestureDetector(
-                                onTap: () {
-                                  // Navigator.push(
-                                  //   context,
-                                  //   PageTransition(
-                                  //     child: const AnnouncementPage(),
-                                  //     type: PageTransitionType.bottomToTop,
-                                  //   ),
-                                  // );
-                                },
-                                child: Container(
-                                  padding:
-                                      const EdgeInsets.symmetric(horizontal: 5),
-                                  decoration: BoxDecoration(
-                                    color: Colors.white,
-                                    borderRadius: const BorderRadius.all(
-                                        Radius.circular(20)),
-                                    boxShadow: [
-                                      BoxShadow(
-                                        color: Colors.grey.shade400,
-                                        spreadRadius: 1,
-                                        blurRadius: 10,
-                                        offset: const Offset(0, 5),
-                                      ),
-                                    ],
-                                  ),
-                                  child: Column(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      Image.asset(
-                                        'assets/icons/announcement.png',
-                                        height: 55,
-                                        width: 55,
-                                      ),
-                                      const SizedBox(
-                                        height: 10,
-                                      ),
-                                      const Text(
-                                        "Announcement",
                                         style: TextStyle(
                                           fontWeight: FontWeight.w500,
                                           letterSpacing: 1,

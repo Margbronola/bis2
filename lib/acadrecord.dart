@@ -1,6 +1,5 @@
 import 'package:bis/global/container.dart';
 import 'package:bis/global/widget.dart';
-import 'package:bis/pdfpreview.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';

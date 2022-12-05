@@ -1,3 +1,4 @@
+import 'package:bis/admindashboard.dart';
 import 'package:bis/global/container.dart';
 import 'package:bis/global/datacacher.dart';
 import 'package:bis/global/widget.dart';
@@ -51,12 +52,21 @@ class _SplashScreenPageState extends State<SplashScreenPage> {
             type: PageTransitionType.fade,
           ),
         );
-      } else {
+      } else if (page == "Student") {
         await Future.delayed(const Duration(seconds: 2));
         Navigator.pushReplacement(
           context,
           PageTransition(
             child: const StudDashboardPage(),
+            type: PageTransitionType.fade,
+          ),
+        );
+      } else {
+        await Future.delayed(const Duration(seconds: 2));
+        Navigator.pushReplacement(
+          context,
+          PageTransition(
+            child: const AdminDashboardPage(),
             type: PageTransitionType.fade,
           ),
         );

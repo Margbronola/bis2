@@ -28,6 +28,14 @@ class _AdminDashboardPageState extends State<AdminDashboardPage> {
       appBar: AppBar(
         automaticallyImplyLeading: false,
         backgroundColor: Colors.greenAccent.shade100,
+        title: const Text(
+          "Admin",
+          style: TextStyle(
+            color: Colors.black,
+            letterSpacing: 2,
+            fontSize: 20,
+          ),
+        ),
         actions: [
           Padding(
             padding: const EdgeInsets.only(right: 10),
@@ -68,10 +76,10 @@ class _AdminDashboardPageState extends State<AdminDashboardPage> {
             color: Colors.white,
             child: Stack(
               children: [
-                ListView(
+                Column(
                   children: [
                     Container(
-                      height: size.height * .30,
+                      height: size.height * .28,
                       decoration: BoxDecoration(
                         color: Colors.greenAccent.shade100,
                         borderRadius: const BorderRadius.only(
@@ -107,9 +115,8 @@ class _AdminDashboardPageState extends State<AdminDashboardPage> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Container(
-                color: Colors.red,
                 alignment: Alignment.center,
-                margin: const EdgeInsets.only(top: 10, bottom: 35),
+                margin: const EdgeInsets.only(top: 20, bottom: 30),
                 padding: const EdgeInsets.symmetric(horizontal: 20),
                 child: const Text(
                   "BAGACAY INTEGRATED SCHOOL",
@@ -127,10 +134,7 @@ class _AdminDashboardPageState extends State<AdminDashboardPage> {
                     horizontal: 25,
                     vertical: 10,
                   ),
-                  child: GridView.extent(
-                    maxCrossAxisExtent: 280,
-                    crossAxisSpacing: 20,
-                    mainAxisSpacing: 30,
+                  child: Column(
                     children: [
                       GestureDetector(
                         onTap: () {
@@ -143,7 +147,10 @@ class _AdminDashboardPageState extends State<AdminDashboardPage> {
                           );
                         },
                         child: Container(
-                          padding: const EdgeInsets.symmetric(horizontal: 5),
+                          width: size.width,
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 30, vertical: 25),
+                          margin: const EdgeInsets.only(bottom: 20),
                           decoration: BoxDecoration(
                             color: Colors.white,
                             borderRadius:
@@ -157,8 +164,7 @@ class _AdminDashboardPageState extends State<AdminDashboardPage> {
                               ),
                             ],
                           ),
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
+                          child: Row(
                             children: [
                               Image.asset(
                                 'assets/icons/identification.png',
@@ -166,13 +172,14 @@ class _AdminDashboardPageState extends State<AdminDashboardPage> {
                                 width: 55,
                               ),
                               const SizedBox(
-                                height: 10,
+                                width: 20,
                               ),
                               const Text(
                                 "Student Record",
                                 style: TextStyle(
                                   fontWeight: FontWeight.w500,
                                   letterSpacing: 1,
+                                  fontSize: 18,
                                 ),
                                 textAlign: TextAlign.center,
                               )
@@ -191,7 +198,9 @@ class _AdminDashboardPageState extends State<AdminDashboardPage> {
                           );
                         },
                         child: Container(
-                          padding: const EdgeInsets.symmetric(horizontal: 5),
+                          width: size.width,
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 30, vertical: 25),
                           decoration: BoxDecoration(
                             color: Colors.white,
                             borderRadius:
@@ -205,8 +214,7 @@ class _AdminDashboardPageState extends State<AdminDashboardPage> {
                               ),
                             ],
                           ),
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
+                          child: Row(
                             children: [
                               Image.asset(
                                 'assets/icons/grade.png',
@@ -214,106 +222,10 @@ class _AdminDashboardPageState extends State<AdminDashboardPage> {
                                 width: 55,
                               ),
                               const SizedBox(
-                                height: 10,
+                                width: 20,
                               ),
                               const Text(
                                 "Grading",
-                                style: TextStyle(
-                                  fontWeight: FontWeight.w500,
-                                  letterSpacing: 1,
-                                ),
-                                textAlign: TextAlign.center,
-                              )
-                            ],
-                          ),
-                        ),
-                      ),
-                      GestureDetector(
-                        onTap: () {
-                          Navigator.push(
-                            context,
-                            PageTransition(
-                              child: const AchieverPage(),
-                              type: PageTransitionType.bottomToTop,
-                            ),
-                          );
-                        },
-                        child: Container(
-                          padding: const EdgeInsets.symmetric(horizontal: 5),
-                          decoration: BoxDecoration(
-                            color: Colors.white,
-                            borderRadius:
-                                const BorderRadius.all(Radius.circular(20)),
-                            boxShadow: [
-                              BoxShadow(
-                                color: Colors.grey.shade400,
-                                spreadRadius: 1,
-                                blurRadius: 10,
-                                offset: const Offset(0, 5),
-                              ),
-                            ],
-                          ),
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Image.asset(
-                                'assets/icons/medal.png',
-                                height: 55,
-                                width: 55,
-                              ),
-                              const SizedBox(
-                                height: 10,
-                              ),
-                              const Text(
-                                "Academic Achievers",
-                                style: TextStyle(
-                                  fontWeight: FontWeight.w500,
-                                  letterSpacing: 1,
-                                ),
-                                textAlign: TextAlign.center,
-                              )
-                            ],
-                          ),
-                        ),
-                      ),
-                      GestureDetector(
-                        onTap: () {
-                          Navigator.push(
-                            context,
-                            PageTransition(
-                              child: const AboutUsPage(),
-                              type: PageTransitionType.bottomToTop,
-                            ),
-                          );
-                        },
-                        child: Container(
-                          padding: const EdgeInsets.symmetric(horizontal: 5),
-                          decoration: BoxDecoration(
-                            color: Colors.white,
-                            borderRadius:
-                                const BorderRadius.all(Radius.circular(20)),
-                            boxShadow: [
-                              BoxShadow(
-                                color: Colors.grey.shade400,
-                                spreadRadius: 1,
-                                blurRadius: 10,
-                                offset: const Offset(0, 5),
-                              ),
-                            ],
-                          ),
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Image.asset(
-                                'assets/icons/info.png',
-                                height: 55,
-                                width: 55,
-                              ),
-                              const SizedBox(
-                                height: 10,
-                              ),
-                              const Text(
-                                "About School",
                                 style: TextStyle(
                                   fontWeight: FontWeight.w500,
                                   letterSpacing: 1,

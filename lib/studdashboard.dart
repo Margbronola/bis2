@@ -107,7 +107,7 @@ class _StudDashboardPageState extends State<StudDashboardPage> {
                     children: <Widget>[
                       Container(
                         alignment: Alignment.center,
-                        margin: const EdgeInsets.only(top: 10, bottom: 35),
+                        margin: const EdgeInsets.only(top: 30, bottom: 35),
                         padding: const EdgeInsets.symmetric(horizontal: 20),
                         child: const Text(
                           "BAGACAY INTEGRATED SCHOOL",
@@ -126,8 +126,8 @@ class _StudDashboardPageState extends State<StudDashboardPage> {
                             vertical: 10,
                           ),
                           child: GridView.extent(
-                            maxCrossAxisExtent: 280,
-                            crossAxisSpacing: 20,
+                            maxCrossAxisExtent: 250,
+                            crossAxisSpacing: 15,
                             mainAxisSpacing: 30,
                             children: [
                               GestureDetector(
@@ -141,8 +141,8 @@ class _StudDashboardPageState extends State<StudDashboardPage> {
                                   );
                                 },
                                 child: Container(
-                                  padding:
-                                      const EdgeInsets.symmetric(horizontal: 5),
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 10),
                                   decoration: BoxDecoration(
                                     color: Colors.white,
                                     borderRadius: const BorderRadius.all(

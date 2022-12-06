@@ -39,6 +39,7 @@ class _Grade11TVLAchieverPageState extends State<Grade11TVLAchieverPage> {
                         PageTransition(
                             child: AddAchieverPage(
                               level: 11,
+                              strand: "TVL",
                             ),
                             type: PageTransitionType.leftToRight),
                       );

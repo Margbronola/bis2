@@ -1,17 +1,19 @@
+import 'package:bis/addinstructor.dart';
 import 'package:bis/global/widget.dart';
-import 'package:bis/student%20record/addstudent.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/src/widgets/container.dart';
+import 'package:flutter/src/widgets/framework.dart';
 import 'package:page_transition/page_transition.dart';
 
-class Grade11TVLStudentPage extends StatefulWidget {
-  const Grade11TVLStudentPage({super.key});
+class InstructorPage extends StatefulWidget {
+  const InstructorPage({super.key});
 
   @override
-  State<Grade11TVLStudentPage> createState() => _Grade11TVLStudentPageState();
+  State<InstructorPage> createState() => _InstructorPageState();
 }
 
-class _Grade11TVLStudentPageState extends State<Grade11TVLStudentPage> {
+class _InstructorPageState extends State<InstructorPage> {
   @override
   Widget build(BuildContext context) {
     final Size size = MediaQuery.of(context).size;
@@ -21,23 +23,9 @@ class _Grade11TVLStudentPageState extends State<Grade11TVLStudentPage> {
         elevation: 0,
         backgroundColor: Colors.greenAccent.shade100,
         foregroundColor: Colors.black,
-        centerTitle: true,
-        title: const Text(
-          "GRADE 11 TVL",
-          style: TextStyle(
-              fontWeight: FontWeight.bold, fontSize: 20, letterSpacing: 1),
-        ),
-      ),
-      body: Container(
-        width: size.width,
-        height: size.height,
-        padding: const EdgeInsets.fromLTRB(20, 0, 20, 20),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.end,
-          children: [
-            SizedBox(
+        actions: [
+          SizedBox(
               width: 100,
-              height: 70,
               child: MaterialButton(
                 elevation: 0,
                 padding: const EdgeInsets.all(0),
@@ -45,11 +33,7 @@ class _Grade11TVLStudentPageState extends State<Grade11TVLStudentPage> {
                   Navigator.push(
                     context,
                     PageTransition(
-                        child: AddStudentPage(
-                          level: 11,
-                          grade: 11,
-                          strand: "TVL",
-                        ),
+                        child: const AddInstructorPage(),
                         type: PageTransitionType.leftToRight),
                   );
                 },
@@ -60,13 +44,29 @@ class _Grade11TVLStudentPageState extends State<Grade11TVLStudentPage> {
                     Text("New Data")
                   ],
                 ),
-              ),
+              )),
+          const SizedBox(width: 20),
+        ],
+      ),
+      body: Container(
+        width: size.width,
+        height: size.height,
+        padding: const EdgeInsets.symmetric(horizontal: 20),
+        child: ListView(
+          children: [
+            const SizedBox(height: 15),
+            MyWidget().text(
+              text: "INSTRUCTOR LIST",
+              fontWeight: FontWeight.bold,
+              size: 20,
+              letterSpacing: 2,
+              align: TextAlign.center,
             ),
+            const SizedBox(height: 30),
             StreamBuilder(
               stream: FirebaseFirestore.instance
-                  .collection("Student")
-                  .where("grade", isEqualTo: "11")
-                  .where("strand", isEqualTo: "TVL")
+                  .collection("Instructor")
+                  .orderBy("lastname")
                   .snapshots(),
               builder: (context, snapshot) {
                 if (snapshot.hasData && !snapshot.hasError) {
@@ -77,12 +77,13 @@ class _Grade11TVLStudentPageState extends State<Grade11TVLStudentPage> {
                     padding: const EdgeInsets.all(0),
                     itemCount: result.size,
                     itemBuilder: (_, i) {
-                      final stud = result.docs[i];
+                      final ins = result.docs[i];
                       return GestureDetector(
                         onTap: () {},
                         child: Container(
                           margin: const EdgeInsets.only(bottom: 5),
-                          padding: const EdgeInsets.all(10),
+                          padding: const EdgeInsets.symmetric(
+                              vertical: 20, horizontal: 15),
                           decoration: BoxDecoration(
                             color: Colors.grey.shade200,
                             borderRadius: BorderRadius.circular(15),
@@ -92,15 +93,16 @@ class _Grade11TVLStudentPageState extends State<Grade11TVLStudentPage> {
                             children: [
                               MyWidget().text(
                                 text:
-                                    "${stud.get("lastname") != null ? "${stud.get("lastname")}" : ""}, ${stud.get("firstname") != null ? "${stud.get("firstname")}" : ""}"
+                                    "${ins.get("lastname") != null ? "${ins.get("lastname")}" : ""}, ${ins.get("firstname") != null ? "${ins.get("firstname")}" : ""}"
                                         .toUpperCase(),
                                 align: TextAlign.center,
                                 fontWeight: FontWeight.bold,
                                 size: 18,
                               ),
                               MyWidget().text(
-                                text:
-                                    "${stud.get("grade") != null ? "${stud.get("grade")}" : ""} ${stud.get("strand") != null ? "${stud.get("strand")}" : ""} - ${stud.get("section") != null ? "${stud.get("section")}" : ""}",
+                                text: ins.get("email") != null
+                                    ? "${ins.get("email")}"
+                                    : "",
                                 align: TextAlign.center,
                                 color: Colors.grey.shade800,
                               ),
@@ -113,7 +115,7 @@ class _Grade11TVLStudentPageState extends State<Grade11TVLStudentPage> {
                 }
                 return MyWidget().loader();
               },
-            ),
+            )
           ],
         ),
       ),

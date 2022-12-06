@@ -4,6 +4,7 @@ import 'package:bis/global/datacacher.dart';
 import 'package:bis/global/widget.dart';
 import 'package:bis/grading.dart';
 import 'package:bis/landing.dart';
+import 'package:bis/profile.dart';
 import 'package:bis/services/auth.dart';
 import 'package:bis/student%20record/studerecord.dart';
 import 'package:flutter/material.dart';
@@ -115,7 +116,7 @@ class _InstructorDashboardPageState extends State<InstructorDashboardPage> {
                   children: <Widget>[
                     Container(
                       alignment: Alignment.center,
-                      margin: const EdgeInsets.only(top: 20, bottom: 30),
+                      margin: const EdgeInsets.all(20),
                       padding: const EdgeInsets.symmetric(horizontal: 20),
                       child: const Text(
                         "BAGACAY INTEGRATED SCHOOL",
@@ -133,8 +134,59 @@ class _InstructorDashboardPageState extends State<InstructorDashboardPage> {
                           horizontal: 25,
                           vertical: 10,
                         ),
-                        child: Column(
+                        child: ListView(
                           children: [
+                            // GestureDetector(
+                            //   onTap: () {
+                            //     Navigator.push(
+                            //       context,
+                            //       PageTransition(
+                            //         child: const InsProfilePage(),
+                            //         type: PageTransitionType.bottomToTop,
+                            //       ),
+                            //     );
+                            //   },
+                            //   child: Container(
+                            //     width: size.width,
+                            //     padding: const EdgeInsets.symmetric(
+                            //         horizontal: 30, vertical: 20),
+                            //     margin: const EdgeInsets.only(bottom: 15),
+                            //     decoration: BoxDecoration(
+                            //       color: Colors.white,
+                            //       borderRadius: const BorderRadius.all(
+                            //           Radius.circular(20)),
+                            //       boxShadow: [
+                            //         BoxShadow(
+                            //           color: Colors.grey.shade400,
+                            //           spreadRadius: 1,
+                            //           blurRadius: 10,
+                            //           offset: const Offset(0, 5),
+                            //         ),
+                            //       ],
+                            //     ),
+                            //     child: Row(
+                            //       children: [
+                            //         Image.asset(
+                            //           'assets/images/male.png',
+                            //           height: 55,
+                            //           width: 55,
+                            //         ),
+                            //         const SizedBox(
+                            //           width: 20,
+                            //         ),
+                            //         const Text(
+                            //           "Profile",
+                            //           style: TextStyle(
+                            //             fontWeight: FontWeight.w500,
+                            //             letterSpacing: 1,
+                            //             fontSize: 18,
+                            //           ),
+                            //           textAlign: TextAlign.center,
+                            //         )
+                            //       ],
+                            //     ),
+                            //   ),
+                            // ),
                             GestureDetector(
                               onTap: () {
                                 Navigator.push(
@@ -148,8 +200,8 @@ class _InstructorDashboardPageState extends State<InstructorDashboardPage> {
                               child: Container(
                                 width: size.width,
                                 padding: const EdgeInsets.symmetric(
-                                    horizontal: 30, vertical: 25),
-                                margin: const EdgeInsets.only(bottom: 20),
+                                    horizontal: 30, vertical: 20),
+                                margin: const EdgeInsets.only(bottom: 15),
                                 decoration: BoxDecoration(
                                   color: Colors.white,
                                   borderRadius: const BorderRadius.all(
@@ -199,8 +251,8 @@ class _InstructorDashboardPageState extends State<InstructorDashboardPage> {
                               child: Container(
                                 width: size.width,
                                 padding: const EdgeInsets.symmetric(
-                                    horizontal: 30, vertical: 25),
-                                margin: const EdgeInsets.only(bottom: 20),
+                                    horizontal: 30, vertical: 20),
+                                margin: const EdgeInsets.only(bottom: 15),
                                 decoration: BoxDecoration(
                                   color: Colors.white,
                                   borderRadius: const BorderRadius.all(
@@ -249,8 +301,8 @@ class _InstructorDashboardPageState extends State<InstructorDashboardPage> {
                               child: Container(
                                 width: size.width,
                                 padding: const EdgeInsets.symmetric(
-                                    horizontal: 30, vertical: 25),
-                                margin: const EdgeInsets.only(bottom: 20),
+                                    horizontal: 30, vertical: 20),
+                                margin: const EdgeInsets.only(bottom: 15),
                                 decoration: BoxDecoration(
                                   color: Colors.white,
                                   borderRadius: const BorderRadius.all(
@@ -299,7 +351,7 @@ class _InstructorDashboardPageState extends State<InstructorDashboardPage> {
                               child: Container(
                                 width: size.width,
                                 padding: const EdgeInsets.symmetric(
-                                    horizontal: 30, vertical: 25),
+                                    horizontal: 30, vertical: 20),
                                 decoration: BoxDecoration(
                                   color: Colors.white,
                                   borderRadius: const BorderRadius.all(

@@ -39,6 +39,7 @@ class _Grade11GASAchieverPageState extends State<Grade11GASAchieverPage> {
                         PageTransition(
                             child: AddAchieverPage(
                               level: 11,
+                              strand: "GAS",
                             ),
                             type: PageTransitionType.leftToRight),
                       );

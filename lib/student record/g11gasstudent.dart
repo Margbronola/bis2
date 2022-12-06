@@ -48,6 +48,7 @@ class _Grade11GASStudentPageState extends State<Grade11GASStudentPage> {
                         child: AddStudentPage(
                           level: 11,
                           grade: 11,
+                          strand: "GAS",
                         ),
                         type: PageTransitionType.leftToRight),
                   );

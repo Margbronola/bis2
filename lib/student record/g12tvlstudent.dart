@@ -48,6 +48,7 @@ class _Grade12TVLStudentPageState extends State<Grade12TVLStudentPage> {
                         child: AddStudentPage(
                           level: 12,
                           grade: 12,
+                          strand: "TVL",
                         ),
                         type: PageTransitionType.leftToRight),
                   );

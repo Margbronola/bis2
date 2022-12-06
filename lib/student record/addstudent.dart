@@ -7,7 +7,8 @@ import 'package:intl/intl.dart';
 class AddStudentPage extends StatefulWidget {
   int? level;
   int grade;
-  AddStudentPage({super.key, this.level, required this.grade});
+  String? strand;
+  AddStudentPage({super.key, this.level, required this.grade, this.strand});
 
   @override
   State<AddStudentPage> createState() => _AddStudentPageState();
@@ -29,11 +30,9 @@ class _AddStudentPageState extends State<AddStudentPage> {
   late final TextEditingController mOccupation;
   bool isloading = false;
   String gender = "";
-  String strandvalue = 'GAS';
   String sectionvalue = '';
   String shsectionvalue = '';
 
-  var strands = ['GAS', 'TVL'];
   var g7section = ['Diamond', 'Ruby', 'Peridot', ''];
   var g8section = ['Emerald', 'Sapphire', 'Opal', 'Garnet', ''];
   var g9section = ['Quarts', 'Acquamarine', 'Pearl', 'Amber', ''];
@@ -162,40 +161,10 @@ class _AddStudentPageState extends State<AddStudentPage> {
                               children: [
                                 MyWidget().text(text: "Strand "),
                                 Expanded(
-                                  child: Container(
-                                    height: 48,
-                                    width: 110,
-                                    padding: const EdgeInsets.all(5),
-                                    margin: const EdgeInsets.only(left: 10),
-                                    alignment: Alignment.centerRight,
-                                    decoration: const BoxDecoration(
-                                      borderRadius:
-                                          BorderRadius.all(Radius.circular(10)),
-                                    ),
-                                    child: DropdownButton(
-                                      isExpanded: false,
-                                      value: strandvalue,
-                                      elevation: 0,
-                                      style: TextStyle(
-                                          fontSize: 18,
-                                          color: Colors.grey.shade600),
-                                      icon: Icon(
-                                        Icons.expand_more_sharp,
-                                        color: Colors.grey.shade600,
-                                      ),
-                                      items: strands.map((String strands) {
-                                        return DropdownMenuItem(
-                                          value: strands,
-                                          child: Text(strands),
-                                        );
-                                      }).toList(),
-                                      onChanged: (String? newValue) {
-                                        setState(() {
-                                          strandvalue = newValue!;
-                                        });
-                                      },
-                                    ),
-                                  ),
+                                  child: MyWidget().text(
+                                      text: "${widget.strand}",
+                                      align: TextAlign.end,
+                                      fontWeight: FontWeight.bold),
                                 ),
                               ],
                             )
@@ -634,21 +603,23 @@ class _AddStudentPageState extends State<AddStudentPage> {
                               setState(() {
                                 isloading = true;
                               });
-                              if (lname.text.isEmpty && fname.text.isEmpty) {
+                              if (lname.text.isEmpty ||
+                                  fname.text.isEmpty ||
+                                  idnum.text.isEmpty) {
                                 Fluttertoast.showToast(msg: "Fill all fields");
                                 setState(() {
                                   isloading = false;
                                 });
                               } else {
                                 Authentication()
-                                    .create(
+                                    .createStudent(
                                   email: email.text,
                                   password: idnum.text,
                                   type: "student",
                                   lname: lname.text,
                                   fname: fname.text,
                                   grade: "${widget.grade}",
-                                  strand: strandvalue,
+                                  strand: "${widget.strand}",
                                   section: section.text,
                                   address: address.text,
                                   sex: gender,

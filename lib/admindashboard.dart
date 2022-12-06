@@ -2,6 +2,7 @@ import 'package:bis/aboutus.dart';
 import 'package:bis/achiever/achiever.dart';
 import 'package:bis/global/datacacher.dart';
 import 'package:bis/grading.dart';
+import 'package:bis/instructor.dart';
 import 'package:bis/landing.dart';
 import 'package:bis/services/auth.dart';
 import 'package:bis/student%20record/studerecord.dart';
@@ -167,7 +168,7 @@ class _AdminDashboardPageState extends State<AdminDashboardPage> {
                           child: Row(
                             children: [
                               Image.asset(
-                                'assets/icons/identification.png',
+                                'assets/images/students.png',
                                 height: 55,
                                 width: 55,
                               ),
@@ -175,7 +176,7 @@ class _AdminDashboardPageState extends State<AdminDashboardPage> {
                                 width: 20,
                               ),
                               const Text(
-                                "Student Record",
+                                "Student",
                                 style: TextStyle(
                                   fontWeight: FontWeight.w500,
                                   letterSpacing: 1,
@@ -192,7 +193,58 @@ class _AdminDashboardPageState extends State<AdminDashboardPage> {
                           Navigator.push(
                             context,
                             PageTransition(
-                              child: const GradingPage(),
+                              child: const InstructorPage(),
+                              type: PageTransitionType.bottomToTop,
+                            ),
+                          );
+                        },
+                        child: Container(
+                          width: size.width,
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 30, vertical: 25),
+                          margin: const EdgeInsets.only(bottom: 20),
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius:
+                                const BorderRadius.all(Radius.circular(20)),
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.grey.shade400,
+                                spreadRadius: 1,
+                                blurRadius: 10,
+                                offset: const Offset(0, 5),
+                              ),
+                            ],
+                          ),
+                          child: Row(
+                            children: [
+                              Image.asset(
+                                'assets/images/male.png',
+                                height: 55,
+                                width: 55,
+                              ),
+                              const SizedBox(
+                                width: 20,
+                              ),
+                              const Text(
+                                "Instructor",
+                                style: TextStyle(
+                                  fontWeight: FontWeight.w500,
+                                  letterSpacing: 1,
+                                  fontSize: 18,
+                                ),
+                                textAlign: TextAlign.center,
+                              )
+                            ],
+                          ),
+                        ),
+                      ),
+                      GestureDetector(
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            PageTransition(
+                              child: const AboutUsPage(),
                               type: PageTransitionType.bottomToTop,
                             ),
                           );
@@ -217,7 +269,7 @@ class _AdminDashboardPageState extends State<AdminDashboardPage> {
                           child: Row(
                             children: [
                               Image.asset(
-                                'assets/icons/grade.png',
+                                'assets/icons/info.png',
                                 height: 55,
                                 width: 55,
                               ),
@@ -225,7 +277,7 @@ class _AdminDashboardPageState extends State<AdminDashboardPage> {
                                 width: 20,
                               ),
                               const Text(
-                                "Grading",
+                                "About Us",
                                 style: TextStyle(
                                   fontWeight: FontWeight.w500,
                                   letterSpacing: 1,

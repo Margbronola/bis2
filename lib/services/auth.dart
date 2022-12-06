@@ -15,7 +15,7 @@ class Authentication {
   CollectionReference instructor =
       FirebaseFirestore.instance.collection('Instructor');
 
-  Future<String?> create({
+  Future<String?> createStudent({
     required String email,
     required String password,
     required String type,
@@ -42,43 +42,69 @@ class Authentication {
       // cacher.uid = creds.user!.uid;
       cacher.pages = page;
       uid = creds.user!.uid;
-      if (type == "instructor") {
-        instructor.doc(creds.user!.uid).set({
-          "email": email,
-          "firstname": fname,
-          "lastname": lname,
-          "address": null,
-          "map": null,
-          "Telephone": null,
-          "image": null,
-        });
-        return await creds.user!.getIdToken();
-      } else {
-        student.doc(creds.user!.uid).set({
-          "email": email,
-          "firstname": fname,
-          "lastname": lname,
-          "lrn": password,
-          "strand": strand,
-          "grade": grade,
-          "section": section,
-          "address": address,
-          "gender": sex,
-          "birthday": dob,
-          "religion": religion,
-          "phoneNumber": number,
-          "father": father,
-          "fatherOccupation": fOccupation,
-          "mother": mother,
-          "motherOccupation": mOccupation,
-        });
-        print("DATA: ${creds.user!.getIdToken()}");
-        return await creds.user!.getIdToken();
-      }
+      student.doc(creds.user!.uid).set({
+        "email": email,
+        "firstname": fname,
+        "lastname": lname,
+        "lrn": password,
+        "strand": strand,
+        "grade": grade,
+        "section": section,
+        "address": address,
+        "gender": sex,
+        "birthday": dob,
+        "religion": religion,
+        "phoneNumber": number,
+        "father": father,
+        "fatherOccupation": fOccupation,
+        "mother": mother,
+        "motherOccupation": mOccupation,
+      });
+      print("DATA: ${creds.user!.getIdToken()}");
+      return await creds.user!.getIdToken();
     } catch (e) {
       return null;
     }
   }
+
+  Future<String?> createInstructor({
+    required String email,
+    required String password,
+    required String fname,
+    required String lname,
+    required String number,
+  }) async {
+    try {
+      UserCredential creds = await auth.createUserWithEmailAndPassword(
+          email: email, password: password);
+      if (creds.user == null) return null;
+      cacher.token = "${creds.user!.getIdToken()}";
+      // cacher.uid = creds.user!.uid;
+      cacher.pages = page;
+      uid = creds.user!.uid;
+      instructor.doc(creds.user!.uid).set({
+        "email": email,
+        "firstname": fname,
+        "lastname": lname,
+        "cellphone": number,
+      });
+      return await creds.user!.getIdToken();
+    } catch (e) {
+      return null;
+    }
+  }
+
+  // Future<void> changePass({required String password}) async{
+  //   try{
+  //     user.updatePassword(password).then((_) {
+  //       print("Successfully changed password");
+  //     }).catchError((error) {
+  //       print("Password can't be changed $error");
+  //     });
+  //   }catch (e) {
+  //     return null;
+  //   }
+  // }
 
   Future<String?> signIn(
       {required String email,

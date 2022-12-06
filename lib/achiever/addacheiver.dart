@@ -7,7 +7,8 @@ import 'package:fluttertoast/fluttertoast.dart';
 
 class AddAchieverPage extends StatefulWidget {
   int? level;
-  AddAchieverPage({super.key, this.level});
+  String? strand;
+  AddAchieverPage({super.key, this.level, this.strand});
 
   @override
   State<AddAchieverPage> createState() => _AddAchieverPageState();
@@ -22,11 +23,9 @@ class _AddAchieverPageState extends State<AddAchieverPage> {
   TextEditingController award = TextEditingController();
   TextEditingController average = TextEditingController();
   bool isloading = false;
-  String strandvalue = 'GAS';
   String sectionvalue = '';
   String shsectionvalue = '';
 
-  var strands = ['GAS', 'TVL'];
   var g7section = ['Diamond', 'Ruby', 'Peridot', ''];
   var g8section = ['Emerald', 'Sapphire', 'Opal', 'Garnet', ''];
   var g9section = ['Quarts', 'Acquamarine', 'Pearl', 'Amber', ''];
@@ -54,39 +53,12 @@ class _AddAchieverPageState extends State<AddAchieverPage> {
                     children: [
                       MyWidget().text(text: "Strand : ", size: 18),
                       Expanded(
-                        child: Container(
-                          height: 48,
-                          width: 110,
-                          padding: const EdgeInsets.all(5),
-                          margin: const EdgeInsets.only(left: 10),
-                          alignment: Alignment.centerRight,
-                          decoration: const BoxDecoration(
-                            borderRadius: BorderRadius.all(Radius.circular(10)),
-                          ),
-                          child: DropdownButton(
-                            isExpanded: false,
-                            value: strandvalue,
-                            elevation: 0,
-                            style: TextStyle(
-                                fontSize: 18, color: Colors.grey.shade600),
-                            icon: Icon(
-                              Icons.expand_more_sharp,
-                              color: Colors.grey.shade600,
-                            ),
-                            items: strands.map((String strands) {
-                              return DropdownMenuItem(
-                                value: strands,
-                                child: Text(strands),
-                              );
-                            }).toList(),
-                            onChanged: (String? newValue) {
-                              setState(() {
-                                strandvalue = newValue!;
-                              });
-                            },
-                          ),
-                        ),
-                      ),
+                          child: Text(
+                        "${widget.strand}",
+                        style: const TextStyle(
+                            fontSize: 20, fontWeight: FontWeight.bold),
+                        textAlign: TextAlign.right,
+                      )),
                     ],
                   )
                 : Container(),
@@ -384,7 +356,7 @@ class _AddAchieverPageState extends State<AddAchieverPage> {
                             AddData()
                                 .addAchieverSH(
                                     grade.text,
-                                    strandvalue,
+                                    "${widget.strand}",
                                     section.text,
                                     sem.text,
                                     name.text,

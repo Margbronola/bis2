@@ -2,12 +2,17 @@ import 'package:bis/addgrade.dart';
 import 'package:bis/global/widget.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:page_transition/page_transition.dart';
 
 class GradingPage extends StatefulWidget {
-  const GradingPage({super.key});
+  String grade;
+  String strand;
+  String section;
+  GradingPage(
+      {super.key,
+      required this.grade,
+      required this.section,
+      required this.strand});
 
   @override
   State<GradingPage> createState() => _GradingPageState();
@@ -44,10 +49,18 @@ class _GradingPageState extends State<GradingPage> {
                 align: TextAlign.center),
             const SizedBox(height: 20),
             StreamBuilder(
-                stream: FirebaseFirestore.instance
-                    .collection("Student")
-                    .orderBy("lastname")
-                    .snapshots(),
+                stream: widget.grade == "12" || widget.grade == "11"
+                    ? FirebaseFirestore.instance
+                        .collection("Student")
+                        .where("grade", isEqualTo: widget.grade)
+                        .where("strand", isEqualTo: widget.strand)
+                        .where("section", isEqualTo: widget.section)
+                        .snapshots()
+                    : FirebaseFirestore.instance
+                        .collection("Student")
+                        .where("grade", isEqualTo: widget.grade)
+                        .where("section", isEqualTo: widget.section)
+                        .snapshots(),
                 builder: (context, snapshot) {
                   if (snapshot.hasData && !snapshot.hasError) {
                     final result = snapshot.data!;

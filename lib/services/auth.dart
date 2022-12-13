@@ -42,24 +42,28 @@ class Authentication {
       // cacher.uid = creds.user!.uid;
       cacher.pages = page;
       uid = creds.user!.uid;
-      student.doc(creds.user!.uid).set({
-        "email": email,
-        "firstname": fname,
-        "lastname": lname,
-        "lrn": password,
-        "strand": strand,
-        "grade": grade,
-        "section": section,
-        "address": address,
-        "gender": sex,
-        "birthday": dob,
-        "religion": religion,
-        "phoneNumber": number,
-        "father": father,
-        "fatherOccupation": fOccupation,
-        "mother": mother,
-        "motherOccupation": mOccupation,
-      });
+      student
+          .doc(creds.user!.uid)
+          .set({
+            "email": email,
+            "firstname": fname,
+            "lastname": lname,
+            "lrn": password,
+            "strand": strand,
+            "grade": grade,
+            "section": section,
+            "address": address,
+            "gender": sex,
+            "birthday": dob,
+            "religion": religion,
+            "phoneNumber": number,
+            "father": father,
+            "fatherOccupation": fOccupation,
+            "mother": mother,
+            "motherOccupation": mOccupation,
+          })
+          .then((value) => print("data Added"))
+          .catchError((error) => print("data couldn't be added."));
       print("DATA: ${creds.user!.getIdToken()}");
       return await creds.user!.getIdToken();
     } catch (e) {
@@ -82,13 +86,22 @@ class Authentication {
       // cacher.uid = creds.user!.uid;
       cacher.pages = page;
       uid = creds.user!.uid;
-      instructor.doc(creds.user!.uid).set({
-        "email": email,
-        "firstname": fname,
-        "lastname": lname,
-        "cellphone": number,
-      });
-      return await creds.user!.getIdToken();
+      instructor
+          .doc(creds.user!.uid)
+          .set({
+            "email": email,
+            "firstname": fname,
+            "lastname": lname,
+            "cellphone": number,
+            "grade": null,
+            "section": null,
+            "strand": null,
+          })
+          .then((value) => print("data Added"))
+          .catchError((error) => print("data couldn't be added."));
+
+      return creds.user!.getIdToken();
+      ;
     } catch (e) {
       return null;
     }

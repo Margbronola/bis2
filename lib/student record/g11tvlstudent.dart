@@ -1,5 +1,6 @@
 import 'package:bis/global/widget.dart';
 import 'package:bis/student%20record/addstudent.dart';
+import 'package:bis/student%20record/studdata.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:page_transition/page_transition.dart';
@@ -79,7 +80,18 @@ class _Grade11TVLStudentPageState extends State<Grade11TVLStudentPage> {
                     itemBuilder: (_, i) {
                       final stud = result.docs[i];
                       return GestureDetector(
-                        onTap: () {},
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            PageTransition(
+                              child: StudentDataPage(
+                                data: stud.data(),
+                                uid: stud.id,
+                              ),
+                              type: PageTransitionType.fade,
+                            ),
+                          );
+                        },
                         child: Container(
                           margin: const EdgeInsets.only(bottom: 5),
                           padding: const EdgeInsets.all(10),

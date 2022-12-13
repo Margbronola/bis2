@@ -1,9 +1,8 @@
-import 'package:bis/addinstructor.dart';
+import 'package:bis/instructor/addinstructor.dart';
 import 'package:bis/global/widget.dart';
+import 'package:bis/instructor/insdata.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:page_transition/page_transition.dart';
 
 class InstructorPage extends StatefulWidget {
@@ -79,7 +78,18 @@ class _InstructorPageState extends State<InstructorPage> {
                     itemBuilder: (_, i) {
                       final ins = result.docs[i];
                       return GestureDetector(
-                        onTap: () {},
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            PageTransition(
+                              child: InstructorDataPage(
+                                uid: ins.id,
+                                data: ins.data(),
+                              ),
+                              type: PageTransitionType.leftToRight,
+                            ),
+                          );
+                        },
                         child: Container(
                           margin: const EdgeInsets.only(bottom: 5),
                           padding: const EdgeInsets.symmetric(

@@ -1,5 +1,6 @@
 import 'package:bis/aboutus.dart';
 import 'package:bis/achiever/achiever.dart';
+import 'package:bis/global/container.dart';
 import 'package:bis/global/datacacher.dart';
 import 'package:bis/global/widget.dart';
 import 'package:bis/grading.dart';
@@ -7,6 +8,7 @@ import 'package:bis/landing.dart';
 import 'package:bis/profile.dart';
 import 'package:bis/services/auth.dart';
 import 'package:bis/student%20record/studerecord.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:page_transition/page_transition.dart';
 
@@ -136,57 +138,57 @@ class _InstructorDashboardPageState extends State<InstructorDashboardPage> {
                         ),
                         child: ListView(
                           children: [
-                            // GestureDetector(
-                            //   onTap: () {
-                            //     Navigator.push(
-                            //       context,
-                            //       PageTransition(
-                            //         child: const InsProfilePage(),
-                            //         type: PageTransitionType.bottomToTop,
-                            //       ),
-                            //     );
-                            //   },
-                            //   child: Container(
-                            //     width: size.width,
-                            //     padding: const EdgeInsets.symmetric(
-                            //         horizontal: 30, vertical: 20),
-                            //     margin: const EdgeInsets.only(bottom: 15),
-                            //     decoration: BoxDecoration(
-                            //       color: Colors.white,
-                            //       borderRadius: const BorderRadius.all(
-                            //           Radius.circular(20)),
-                            //       boxShadow: [
-                            //         BoxShadow(
-                            //           color: Colors.grey.shade400,
-                            //           spreadRadius: 1,
-                            //           blurRadius: 10,
-                            //           offset: const Offset(0, 5),
-                            //         ),
-                            //       ],
-                            //     ),
-                            //     child: Row(
-                            //       children: [
-                            //         Image.asset(
-                            //           'assets/images/male.png',
-                            //           height: 55,
-                            //           width: 55,
-                            //         ),
-                            //         const SizedBox(
-                            //           width: 20,
-                            //         ),
-                            //         const Text(
-                            //           "Profile",
-                            //           style: TextStyle(
-                            //             fontWeight: FontWeight.w500,
-                            //             letterSpacing: 1,
-                            //             fontSize: 18,
-                            //           ),
-                            //           textAlign: TextAlign.center,
-                            //         )
-                            //       ],
-                            //     ),
-                            //   ),
-                            // ),
+                            GestureDetector(
+                              onTap: () {
+                                Navigator.push(
+                                  context,
+                                  PageTransition(
+                                    child: const InsProfilePage(),
+                                    type: PageTransitionType.bottomToTop,
+                                  ),
+                                );
+                              },
+                              child: Container(
+                                width: size.width,
+                                padding: const EdgeInsets.symmetric(
+                                    horizontal: 30, vertical: 20),
+                                margin: const EdgeInsets.only(bottom: 15),
+                                decoration: BoxDecoration(
+                                  color: Colors.white,
+                                  borderRadius: const BorderRadius.all(
+                                      Radius.circular(20)),
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: Colors.grey.shade400,
+                                      spreadRadius: 1,
+                                      blurRadius: 10,
+                                      offset: const Offset(0, 5),
+                                    ),
+                                  ],
+                                ),
+                                child: Row(
+                                  children: [
+                                    Image.asset(
+                                      'assets/images/male.png',
+                                      height: 55,
+                                      width: 55,
+                                    ),
+                                    const SizedBox(
+                                      width: 20,
+                                    ),
+                                    const Text(
+                                      "Profile",
+                                      style: TextStyle(
+                                        fontWeight: FontWeight.w500,
+                                        letterSpacing: 1,
+                                        fontSize: 18,
+                                      ),
+                                      textAlign: TextAlign.center,
+                                    )
+                                  ],
+                                ),
+                              ),
+                            ),
                             GestureDetector(
                               onTap: () {
                                 Navigator.push(
@@ -238,55 +240,71 @@ class _InstructorDashboardPageState extends State<InstructorDashboardPage> {
                                 ),
                               ),
                             ),
-                            GestureDetector(
-                              onTap: () {
-                                Navigator.push(
-                                  context,
-                                  PageTransition(
-                                    child: const GradingPage(),
-                                    type: PageTransitionType.bottomToTop,
-                                  ),
-                                );
-                              },
-                              child: Container(
-                                width: size.width,
-                                padding: const EdgeInsets.symmetric(
-                                    horizontal: 30, vertical: 20),
-                                margin: const EdgeInsets.only(bottom: 15),
-                                decoration: BoxDecoration(
-                                  color: Colors.white,
-                                  borderRadius: const BorderRadius.all(
-                                      Radius.circular(20)),
-                                  boxShadow: [
-                                    BoxShadow(
-                                      color: Colors.grey.shade400,
-                                      spreadRadius: 1,
-                                      blurRadius: 10,
-                                      offset: const Offset(0, 5),
-                                    ),
-                                  ],
-                                ),
-                                child: Row(
-                                  children: [
-                                    Image.asset(
-                                      'assets/icons/grade.png',
-                                      height: 55,
-                                      width: 55,
-                                    ),
-                                    const SizedBox(
-                                      width: 20,
-                                    ),
-                                    const Text(
-                                      "Grading",
-                                      style: TextStyle(
-                                        fontWeight: FontWeight.w500,
-                                        letterSpacing: 1,
+                            StreamBuilder(
+                              stream: FirebaseFirestore.instance
+                                  .collection("Instructor")
+                                  .doc(uid)
+                                  .snapshots(),
+                              builder: (context, snapshot) {
+                                if (snapshot.hasData && !snapshot.hasError) {
+                                  final ins = snapshot.data!;
+                                  return GestureDetector(
+                                    onTap: () {
+                                      Navigator.push(
+                                        context,
+                                        PageTransition(
+                                          child: GradingPage(
+                                            grade: ins.get("grade"),
+                                            section: ins.get("section"),
+                                            strand: ins.get("strand"),
+                                          ),
+                                          type: PageTransitionType.bottomToTop,
+                                        ),
+                                      );
+                                    },
+                                    child: Container(
+                                      width: size.width,
+                                      padding: const EdgeInsets.symmetric(
+                                          horizontal: 30, vertical: 20),
+                                      margin: const EdgeInsets.only(bottom: 15),
+                                      decoration: BoxDecoration(
+                                        color: Colors.white,
+                                        borderRadius: const BorderRadius.all(
+                                            Radius.circular(20)),
+                                        boxShadow: [
+                                          BoxShadow(
+                                            color: Colors.grey.shade400,
+                                            spreadRadius: 1,
+                                            blurRadius: 10,
+                                            offset: const Offset(0, 5),
+                                          ),
+                                        ],
                                       ),
-                                      textAlign: TextAlign.center,
-                                    )
-                                  ],
-                                ),
-                              ),
+                                      child: Row(
+                                        children: [
+                                          Image.asset(
+                                            'assets/icons/grade.png',
+                                            height: 55,
+                                            width: 55,
+                                          ),
+                                          const SizedBox(
+                                            width: 20,
+                                          ),
+                                          const Text(
+                                            "Grading",
+                                            style: TextStyle(
+                                              fontWeight: FontWeight.w500,
+                                              letterSpacing: 1,
+                                            ),
+                                            textAlign: TextAlign.center,
+                                          )
+                                        ],
+                                      ),
+                                    ),
+                                  );
+                                }
+                                return MyWidget().loader();
+                              },
                             ),
                             GestureDetector(
                               onTap: () {

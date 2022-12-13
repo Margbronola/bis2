@@ -1,3 +1,5 @@
+// ignore_for_file: must_be_immutable
+
 import 'package:bis/global/widget.dart';
 import 'package:bis/services/auth.dart';
 import 'package:flutter/material.dart';
@@ -19,7 +21,6 @@ class _AddStudentPageState extends State<AddStudentPage> {
   late final TextEditingController lname;
   late final TextEditingController fname;
   late final TextEditingController idnum;
-  late final TextEditingController section;
   late final TextEditingController address;
   late final TextEditingController dob;
   late final TextEditingController religion;
@@ -44,7 +45,6 @@ class _AddStudentPageState extends State<AddStudentPage> {
     lname = TextEditingController();
     fname = TextEditingController();
     idnum = TextEditingController();
-    section = TextEditingController();
     address = TextEditingController();
     dob = TextEditingController();
     email = TextEditingController();
@@ -62,7 +62,6 @@ class _AddStudentPageState extends State<AddStudentPage> {
     lname.dispose();
     fname.dispose();
     idnum.dispose();
-    section.dispose();
     address.dispose();
     dob.dispose();
     email.dispose();
@@ -619,8 +618,14 @@ class _AddStudentPageState extends State<AddStudentPage> {
                                   lname: lname.text,
                                   fname: fname.text,
                                   grade: "${widget.grade}",
-                                  strand: "${widget.strand}",
-                                  section: section.text,
+                                  strand:
+                                      widget.level == 12 || widget.level == 11
+                                          ? "${widget.strand}"
+                                          : null,
+                                  section:
+                                      widget.level == 12 || widget.level == 11
+                                          ? shsectionvalue
+                                          : sectionvalue,
                                   address: address.text,
                                   sex: gender,
                                   dob: dob.text,

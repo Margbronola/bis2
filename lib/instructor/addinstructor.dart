@@ -88,7 +88,10 @@ class _AddInstructorPageState extends State<AddInstructorPage> {
                             height: 40,
                             padding: const EdgeInsets.only(left: 10),
                             child: MyWidget().textFormField2(
-                                align: TextAlign.right, controller: lname),
+                              align: TextAlign.right,
+                              controller: lname,
+                              capitalization: TextCapitalization.words,
+                            ),
                           )),
                         ],
                       ),
@@ -101,22 +104,10 @@ class _AddInstructorPageState extends State<AddInstructorPage> {
                             height: 40,
                             padding: const EdgeInsets.only(left: 10),
                             child: MyWidget().textFormField2(
-                                align: TextAlign.right, controller: fname),
-                          )),
-                        ],
-                      ),
-                      const SizedBox(height: 5),
-                      Row(
-                        children: [
-                          MyWidget().text(text: "Number : "),
-                          Expanded(
-                              child: Container(
-                            height: 40,
-                            padding: const EdgeInsets.only(left: 10),
-                            child: MyWidget().textFormField2(
-                                align: TextAlign.right,
-                                controller: number,
-                                keyboardType: TextInputType.phone),
+                              align: TextAlign.right,
+                              controller: fname,
+                              capitalization: TextCapitalization.words,
+                            ),
                           )),
                         ],
                       ),
@@ -149,6 +140,21 @@ class _AddInstructorPageState extends State<AddInstructorPage> {
                         ],
                       ),
                       const SizedBox(height: 5),
+                      Row(
+                        children: [
+                          MyWidget().text(text: "Phone Number : "),
+                          Expanded(
+                              child: Container(
+                            height: 40,
+                            padding: const EdgeInsets.only(left: 10),
+                            child: MyWidget().textFormField2(
+                                align: TextAlign.right,
+                                controller: number,
+                                keyboardType: TextInputType.phone),
+                          )),
+                        ],
+                      ),
+                      const SizedBox(height: 20),
                     ],
                   ),
                 ),

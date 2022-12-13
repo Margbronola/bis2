@@ -2,7 +2,7 @@ import 'package:bis/aboutus.dart';
 import 'package:bis/achiever/achiever.dart';
 import 'package:bis/global/datacacher.dart';
 import 'package:bis/grading.dart';
-import 'package:bis/instructor.dart';
+import 'package:bis/instructor/instructor.dart';
 import 'package:bis/landing.dart';
 import 'package:bis/services/auth.dart';
 import 'package:bis/student%20record/studerecord.dart';
